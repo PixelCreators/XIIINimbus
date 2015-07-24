@@ -11,7 +11,7 @@ public class Frustration : MonoBehaviour
     Text frustrationLevelText;
 
 
-    void Awake
+    void Awake()
     {
         frustrationLevelText = GetComponent<Text>();
     }
