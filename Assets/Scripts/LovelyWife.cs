@@ -46,8 +46,6 @@ public class LovelyWife : MonoBehaviour {
                 actionKey(2, 2);
             if (Input.GetKeyDown(KeyCode.D) && XType)
                 actionKey(2, 3);
-            if (Input.GetKeyDown(KeyCode.F) && XType)
-                actionKey(2, 4);
         }
     }
     //akcje jakie wykonuje przycisk przy eventach podstawowych
@@ -92,7 +90,7 @@ public class LovelyWife : MonoBehaviour {
             yield return new WaitForSeconds(startEventTime);
             BColor = Random.Range(1, 5);
             XColor = true;
-            BType = Random.Range(1, 5);
+            BType = Random.Range(1, 4);
             XType = true;
         }
     }
