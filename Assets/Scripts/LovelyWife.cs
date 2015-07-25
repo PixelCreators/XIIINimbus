@@ -8,6 +8,7 @@ public class LovelyWife : MonoBehaviour
     public int shoeOrEvent;
     
     public int chosenEvent;                 //numer wybranego eventu
+    public Text eventMessageToDisplay;           //komunikat jaki zachodzi event
     
     public int BColor;                      //kolor buta
     public int BType;                       //wzor buta
@@ -149,9 +150,11 @@ public class LovelyWife : MonoBehaviour
         {
         case 1:
             Debug.Log("Event number 1 was chosen");
+            startEvent1_tooLittleMoney();
             break;
         case 2:
             Debug.Log("Event number 2 was chosen");
+            startEvent2_GrumpyCat();
             break;
         case 3:
             Debug.Log("Event number 3 was chosen");
@@ -165,6 +168,40 @@ public class LovelyWife : MonoBehaviour
         default:
             Debug.Log("No event was chosen");
             break;
+        }
+    }
+
+    //EVENTS:
+
+    //too little money
+    void startEvent1_tooLittleMoney()
+    {
+        if(gameControl.levelDecision == 500)
+        {
+            GameObject findTextMessage = GameObject.FindWithTag("TextMessage");
+            if (findTextMessage != null)
+            {
+                Debug.Log("LOAD :: Zaladowane Text Message Object");
+                eventMessageToDisplay = findTextMessage.GetComponent<Text>();
+                eventMessageToDisplay.text = "Sorry! Suddenly it tourned out that you have too little money! :( You can't afford these shoes. Choose an other pair.";
+                gameControl.levelDecision = 250;
+                gameControl.levelFrustration += 20;
+            }
+        }
+    }
+
+    //Grumpy Cat
+    void startEvent2_GrumpyCat()
+    {
+        if (gameControl.levelDecision > 150)
+        {
+            GameObject findTextMessage = GameObject.FindWithTag("TextMessage");
+            if (findTextMessage != null)
+            {
+                Debug.Log("LOAD :: Zaladowane Text Message Object");
+                eventMessageToDisplay = findTextMessage.GetComponent<Text>();
+                eventMessageToDisplay.text = "Oh no! Grumpy Cat visited the shop and decided to freeze you with its daily eyesight. :( You can't use any action for 5 seconds.";
+            }
         }
     }
 }
