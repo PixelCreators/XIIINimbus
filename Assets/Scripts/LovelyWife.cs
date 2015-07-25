@@ -4,19 +4,20 @@ using System.Collections;
 
 public class LovelyWife : MonoBehaviour
 {
-    public float startTimer; //czas, co jaki ma byc dokonany wybor miedzy butem a eventem
     public int shoeOrEvent;
     
     public int chosenEvent;                 //numer wybranego eventu
     public Text eventMessageToDisplay;           //komunikat jaki zachodzi event
+    Animator anima;                         //referencja do animacji
     
     public int BColor;                      //kolor buta
     public int BType;                       //wzor buta
     public bool XColor;                     //czy nie wybrano
     public bool XType;                      //czy nie wybrano
     public int points;                      //zmienna do decyzyjnosci
-    public float startWifesChoisesTimer;    //czas co jaki losuje sie event (podstawowy lub specjalny)
+    public float startTimer;            //czas co jaki losuje sie event (podstawowy lub specjalny)
     public Controller gameControl;          //obiekt kontrolera
+    public int IDZdarzenia;                 //numer ID animacji
 
 	void Start () 
     {
@@ -30,6 +31,7 @@ public class LovelyWife : MonoBehaviour
         Debug.Log("WIFE :: Start korutyny");
         StartCoroutine(ChooseBetweenShoeAndEvent());
         StartCoroutine(pressKey());
+        anima = GetComponent<Animator>();
 	}
     //korutyna pilnujaca klawiatury w evencie podstawowym
     IEnumerator pressKey()
@@ -115,8 +117,10 @@ public class LovelyWife : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(startTimer);
-            shoeOrEvent = Random.Range(1, 3);
-
+            
+            //Animator anim = new Animator();
+            //if(anim.GetCurrentAnimatorStateInfo(0).IsName("WifeStanding"));
+            shoeOrEvent = Random.Range(1, 2);
             switch (shoeOrEvent)
             {
             case 1:
@@ -139,6 +143,8 @@ public class LovelyWife : MonoBehaviour
         XColor = true;
         BType = Random.Range(1, 4);
         XType = true;
+        IDZdarzenia = 10 * BType + BColor;
+        anima.SetInteger("IDEvent", IDZdarzenia);
     }
 
     //function choosing an event
