@@ -4,7 +4,6 @@ using System.Collections;
 
 public class Controller : MonoBehaviour
 {
-
     public Text frustrationLevel;   //objekt wyswietlajacy poziom frustracji
     public Text decisionLevel;      //obiekt wyswietlajacy poziom zdecydowania
     public Image frustrationBar;    //przedstawienie graficzne frustracji
@@ -19,6 +18,56 @@ public class Controller : MonoBehaviour
     public float prcDecision;       //zmienna procentowa decyzji
 
     void Start()
+    {
+        loadData();             //wczytanie obiektów
+        
+        //startowe wartości
+        levelFrustration = 0;   //frustracja na 0
+        levelDecision = 0;      //zdecydowanie na 0
+        
+        //startowanie korutyn
+        StartCoroutine(FrustrationINC());       //korutyna ktora zwieksza frustracje
+        StartCoroutine(UpdateBars());           //korutyna ktora aktualizuje paski postepu
+
+    }
+
+  /*  IEnumerator drawShoe()
+    {
+
+    }*/
+    //funkcja która aktualizuje progress bary
+    IEnumerator UpdateBars()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(incTime * 0.5f);
+            prcFrustration = levelFrustration / maxlevelFrustration;
+            prcDecision = levelDecision / maxlevelDecision;
+            //Debug.Log("BARS :: Frustracja % = " + prcFrustration + " Zdecydowanie % = " + prcDecision);
+            decisionBar.fillAmount =prcDecision;
+            frustrationBar.fillAmount = prcFrustration;
+            frustrationLevel.text = "Frustration: " + levelFrustration + "/" + maxlevelFrustration;
+            decisionLevel.text = "Decision: " + levelDecision + "/" + maxlevelDecision;
+            if (levelFrustration >= maxlevelFrustration || levelDecision >= maxlevelDecision)
+            {
+                Debug.Log("CLOSE :: Zamknieto Korutyny Kontrolera");
+                StopAllCoroutines();
+                break;
+            }
+        }
+    }
+    //funkcja ktora zwieksza frustracje z czasem
+    IEnumerator FrustrationINC()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(incTime);
+            levelFrustration = incFrustration + levelFrustration;
+            //Debug.Log("CORUT :: Niby zwieksza frustracje");
+        }
+    }
+    //funkcja wczytujaca obiekty
+    void loadData()
     {
         //wczytywanie obiektów tekstowych
         GameObject findFrustration = GameObject.FindWithTag("Frustration");
@@ -47,42 +96,6 @@ public class Controller : MonoBehaviour
         {
             Debug.Log("LOAD :: Zaladowanie Decision Bar");
             decisionBar = findDecisionBar.GetComponent<Image>();
-        }
-        
-        //startowe wartości
-        levelFrustration = 0;   //frustracja na 0
-        levelDecision = 0;      //zdecydowanie na 0
-
-        StartCoroutine(FrustrationINC());       //korutyna ktora zwieksza frustracje
-        StartCoroutine(UpdateBars());           //korutyna ktora aktualizuje paski postepu
-
-    }
-
-    IEnumerator UpdateBars()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(incTime);
-            prcFrustration = levelFrustration / maxlevelFrustration;
-            prcDecision = levelDecision / maxlevelDecision;
-            Debug.Log("UPDT :: Frustracja % = " + prcFrustration + " Zdecydowanie % = " + prcDecision);
-            decisionBar.fillAmount =prcDecision;
-            frustrationBar.fillAmount = prcFrustration;
-            if (levelFrustration >= maxlevelFrustration)
-                break;
-        }
-    }
-
-    IEnumerator FrustrationINC()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(incTime);
-            levelFrustration = incFrustration + levelFrustration;
-            frustrationLevel.text = "Frustration: " + levelFrustration + "/" + maxlevelFrustration;
-            //Debug.Log("CORUT :: Niby zwieksza frustracje");
-            if (levelFrustration >= maxlevelFrustration)
-                break;
         }
     }
 }
