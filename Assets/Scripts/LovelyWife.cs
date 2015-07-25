@@ -31,20 +31,20 @@ public class LovelyWife : MonoBehaviour {
         while (true)
         {
             yield return new WaitForSeconds(0.01f);
-            if (Input.GetKeyDown(KeyCode.Q) && XColor)
+            if (Input.GetKeyDown(KeyCode.A) && XColor)
                 actionKey(1, 1);
-            if (Input.GetKeyDown(KeyCode.W) && XColor)
+            if (Input.GetKeyDown(KeyCode.S) && XColor)
                 actionKey(1, 2);
-            if (Input.GetKeyDown(KeyCode.E) && XColor)
+            if (Input.GetKeyDown(KeyCode.D) && XColor)
                 actionKey(1, 3);
-            if (Input.GetKeyDown(KeyCode.R) && XColor)
+            if (Input.GetKeyDown(KeyCode.F) && XColor)
                 actionKey(1, 4);
 
-            if (Input.GetKeyDown(KeyCode.A) && XType)
+            if (Input.GetKeyDown(KeyCode.Q) && XType)
                 actionKey(2, 1);
-            if (Input.GetKeyDown(KeyCode.S) && XType)
+            if (Input.GetKeyDown(KeyCode.W) && XType)
                 actionKey(2, 2);
-            if (Input.GetKeyDown(KeyCode.D) && XType)
+            if (Input.GetKeyDown(KeyCode.E) && XType)
                 actionKey(2, 3);
         }
     }
