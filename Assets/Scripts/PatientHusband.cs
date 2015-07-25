@@ -8,11 +8,11 @@ public class PatientHusband : MonoBehaviour
     public Controller myController; //obiekt kontrolera
 
     public bool smokingUsed = false;
-    public bool meditationUsed = false;
     public bool drinkingUsed = false;
+    public bool meditationUsed = false;
     public bool shoutingUsed = false;
-    public bool quoteUsed = false;
     public bool manipulationUsed = false;
+    public bool quoteUsed = false;
     public bool justDoItUsed = false;
 
     void Start()
@@ -25,11 +25,11 @@ public class PatientHusband : MonoBehaviour
     }
 
     public int frToSubstr_smoking = 50;
-    public int frToSubstr_meditation = 100;
     public int frToSubstr_drinking = 100;
+    public int frToSubstr_meditation = 100;
     public int frToSubstr_shouting = 150;
-    public int frToSubstr_quote = 150;
     public int frToSubstr_manipulation = 200;
+    public int frToSubstr_quote = 150;
     public int frToSubstr_justDoIt = 200;
 
     //ACTIONS:
@@ -42,20 +42,6 @@ public class PatientHusband : MonoBehaviour
             else
                 myController.levelFrustration = 0;
             smokingUsed = true;
-        }
-        else
-            return;
-    }
-
-    public void Meditate()
-    {
-        if (meditationUsed == false)
-        {
-            if (myController.levelFrustration > frToSubstr_meditation)
-                myController.levelFrustration = myController.levelFrustration - frToSubstr_meditation;
-            else
-                myController.levelFrustration = 0;
-            meditationUsed = true;
         }
         else
             return;
@@ -75,6 +61,20 @@ public class PatientHusband : MonoBehaviour
             return;
     }
 
+    public void Meditate()
+    {
+        if (meditationUsed == false)
+        {
+            if (myController.levelFrustration > frToSubstr_meditation)
+                myController.levelFrustration = myController.levelFrustration - frToSubstr_meditation;
+            else
+                myController.levelFrustration = 0;
+            meditationUsed = true;
+        }
+        else
+            return;
+    }
+
     public void Shout()
     {
         if (shoutingUsed == false)
@@ -84,6 +84,20 @@ public class PatientHusband : MonoBehaviour
             else
                 myController.levelFrustration = 0;
             shoutingUsed = true;
+        }
+        else
+            return;
+    }
+
+    public void Manipulate()
+    {
+        if (manipulationUsed == false)
+        {
+            if (myController.levelFrustration > frToSubstr_manipulation)
+                myController.levelFrustration = myController.levelFrustration - frToSubstr_manipulation;
+            else
+                myController.levelFrustration = 0;
+            manipulationUsed = true;
         }
         else
             return;
@@ -109,20 +123,6 @@ public class PatientHusband : MonoBehaviour
             return;
     }
 
-    public void Manipulate()
-    {
-        if (manipulationUsed == false)
-        {
-            if (myController.levelFrustration > frToSubstr_manipulation)
-                myController.levelFrustration = myController.levelFrustration - frToSubstr_manipulation;
-            else
-                myController.levelFrustration = 0;
-            manipulationUsed = true;
-        }
-        else
-            return;
-    }
-
     public void JustDoIt()
     {
         if (justDoItUsed == false)
@@ -142,9 +142,4 @@ public class PatientHusband : MonoBehaviour
         else
             return;
     }
-
-	void Update ()
-    {
-	
-	}
 }

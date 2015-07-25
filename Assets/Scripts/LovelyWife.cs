@@ -2,15 +2,20 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class LovelyWife : MonoBehaviour {
-
-    public int BColor;              //kolor buta
-    public int BType;               //wzor buta
-    public bool XColor;             //czy nie wybrano
-    public bool XType;              //czy nie wybrano
-    public int points;              //zmienna do decyzyjnosci
-    public float startEventTime;    //czas co jaki losuje sie event (podstawowy lub specjalny)
-    public Controller gameControl;  //obiekt kontrolera
+public class LovelyWife : MonoBehaviour
+{
+    public float startTimer; //czas, co jaki ma byc dokonany wybor miedzy butem a eventem
+    public int shoeOrEvent;
+    
+    public int chosenEvent;                 //numer wybranego eventu
+    
+    public int BColor;                      //kolor buta
+    public int BType;                       //wzor buta
+    public bool XColor;                     //czy nie wybrano
+    public bool XType;                      //czy nie wybrano
+    public int points;                      //zmienna do decyzyjnosci
+    public float startWifesChoisesTimer;    //czas co jaki losuje sie event (podstawowy lub specjalny)
+    public Controller gameControl;          //obiekt kontrolera
 
 	void Start () 
     {
@@ -22,7 +27,7 @@ public class LovelyWife : MonoBehaviour {
         XColor = true;
         XType = true;
         Debug.Log("WIFE :: Start korutyny");
-        StartCoroutine(Losuj());
+        StartCoroutine(ChooseBetweenShoeAndEvent());
         StartCoroutine(pressKey());
 	}
     //korutyna pilnujaca klawiatury w evencie podstawowym
@@ -102,16 +107,64 @@ public class LovelyWife : MonoBehaviour {
                 return false;
         }
     }
-    //korutyna losujaca event
-    IEnumerator Losuj()
+    
+    //coroutine choosing between a shoe and an event
+    IEnumerator ChooseBetweenShoeAndEvent()
     {
         while (true)
         {
-            yield return new WaitForSeconds(startEventTime);
-            BColor = Random.Range(1, 5);
-            XColor = true;
-            BType = Random.Range(1, 4);
-            XType = true;
+            yield return new WaitForSeconds(startTimer);
+            shoeOrEvent = Random.Range(1, 3);
+
+            switch (shoeOrEvent)
+            {
+            case 1:
+                Losuj();
+                break;
+            case 2:
+                RadomlyChooseEvent();
+                break;
+            default:
+                Debug.Log("Nothing was chosen to happen");
+                break;
+            }
+        }
+    }
+
+    //function choosing a shoe
+    void Losuj()
+    {
+        BColor = Random.Range(1, 5);
+        XColor = true;
+        BType = Random.Range(1, 4);
+        XType = true;
+    }
+
+    //function choosing an event
+    void RadomlyChooseEvent()
+    {
+        chosenEvent = Random.Range(1, 6);
+
+        switch (chosenEvent)
+        {
+        case 1:
+            Debug.Log("Event number 1 was chosen");
+            break;
+        case 2:
+            Debug.Log("Event number 2 was chosen");
+            break;
+        case 3:
+            Debug.Log("Event number 3 was chosen");
+            break;
+        case 4:
+            Debug.Log("Event number 4 was chosen");
+            break;
+        case 5:
+            Debug.Log("Event number 5 was chosen");
+            break;
+        default:
+            Debug.Log("No event was chosen");
+            break;
         }
     }
 }
