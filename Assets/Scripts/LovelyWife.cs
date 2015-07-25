@@ -48,6 +48,26 @@ public class LovelyWife : MonoBehaviour {
                 actionKey(2, 3);
         }
     }
+
+    void pressButton()
+    {
+        if (Input.GetKeyDown(KeyCode.Q) && XColor)
+            actionKey(1, 1);
+        if (Input.GetKeyDown(KeyCode.W) && XColor)
+            actionKey(1, 2);
+        if (Input.GetKeyDown(KeyCode.E) && XColor)
+            actionKey(1, 3);
+        if (Input.GetKeyDown(KeyCode.R) && XColor)
+            actionKey(1, 4);
+
+        if (Input.GetKeyDown(KeyCode.A) && XType)
+            actionKey(2, 1);
+        if (Input.GetKeyDown(KeyCode.S) && XType)
+            actionKey(2, 2);
+        if (Input.GetKeyDown(KeyCode.D) && XType)
+            actionKey(2, 3);
+    }
+
     //akcje jakie wykonuje przycisk przy eventach podstawowych
     void actionKey(int y, int x)
     {
