@@ -19,6 +19,12 @@ public class LovelyWife : MonoBehaviour
 
     GameObject myPanel;
 
+    public Sprite event1_lackOfMoney;
+    public Sprite event2_grumpyCat;
+    public Sprite event3_NedStark;
+    public Sprite event4;
+    public Sprite event5;
+
 	void Start () 
     {
         GameObject findController = GameObject.FindWithTag("GameController");
@@ -154,7 +160,7 @@ public class LovelyWife : MonoBehaviour
     void RadomlyChooseEvent()
     {
         chosenEvent = Random.Range(1, 6);
-
+           
         switch (chosenEvent)
         {
         case 1:
@@ -169,14 +175,14 @@ public class LovelyWife : MonoBehaviour
             Debug.Log("Event number 3 was chosen");
             startEvent3_winterIsComing();
             break;
-        case 4:
-            Debug.Log("Event number 4 was chosen");
-            startEvent4_fourth();
-            break;
-        case 5:
-            Debug.Log("Event number 5 was chosen");
-            startEvent5_fifth();
-            break;
+        //case 4:
+        //    Debug.Log("Event number 4 was chosen");
+        //    startEvent4_fourth();
+        //    break;
+        //case 5:
+        //    Debug.Log("Event number 5 was chosen");
+        //    startEvent5_fifth();
+        //    break;
         default:
             Debug.Log("No event was chosen");
             break;
@@ -198,16 +204,29 @@ public class LovelyWife : MonoBehaviour
     void startEvent1_tooLittleMoney()
     {
         myPanel.SetActive(true);
-        Time.timeScale = 0;
-        
-        GameObject findTextMessage = GameObject.FindWithTag("TextMessage");
-        if (findTextMessage != null)
+
+        if(gameControl.levelDecision >= 200)
         {
-            Debug.Log("LOAD :: Zaladowane Text Message Object");
-            eventMessageToDisplay = findTextMessage.GetComponent<Text>();
-            eventMessageToDisplay.text = "Sorry! Suddenly it tourned out that you have too little money! :( You can't afford these shoes. Choose an other pair.";
-            gameControl.levelDecision = 250;
-            gameControl.levelFrustration += 20;
+            myPanel.SetActive(true);
+            Time.timeScale = 0;
+
+            GameObject findTextMessage = GameObject.FindWithTag("TextMessage");
+            if (findTextMessage != null)
+            {
+                Debug.Log("LOAD :: Zaladowane Text Message Object");
+                eventMessageToDisplay = findTextMessage.GetComponent<Text>();
+                eventMessageToDisplay.text = "Sorry! Suddenly it turned out that you have too little money! :( You can't afford these shoes. Choose an other pair. +50 to frustration level, decision = 200";
+                gameControl.levelDecision = 200;
+                gameControl.levelFrustration += 50;
+
+                GameObject findIllustration = GameObject.FindWithTag("EventIllustration");
+                Debug.Log(findIllustration.name);
+                if (findIllustration != null)
+                {
+                    findIllustration.GetComponent<Image>().sprite = event1_lackOfMoney;
+                }
+            }
+            Time.timeScale = 0;
         }
     }
 
@@ -215,37 +234,52 @@ public class LovelyWife : MonoBehaviour
     void startEvent2_GrumpyCat()
     {
         myPanel.SetActive(true);
-        Time.timeScale = 0;
         
         GameObject findTextMessage = GameObject.FindWithTag("TextMessage");
         if (findTextMessage != null)
         {
             Debug.Log("LOAD :: Zaladowane Text Message Object");
             eventMessageToDisplay = findTextMessage.GetComponent<Text>();
-            eventMessageToDisplay.text = "Oh no! Grumpy Cat visited the shop and decided to freeze you with its daily eyesight. :( You can't use any action for 5 seconds.";
+            eventMessageToDisplay.text = "Oh no! Grumpy Cat visited the shop and decided to freeze you with its eyesight. + 40 to frustration level";
+            gameControl.levelFrustration += 40;
+
+            GameObject findIllustration = GameObject.FindWithTag("EventIllustration");
+            Debug.Log(findIllustration.name);
+            if (findIllustration != null)
+            {
+                findIllustration.GetComponent<Image>().sprite = event2_grumpyCat;
+            }
         }
+        Time.timeScale = 0;
     }
 
     //winter is coming
     void startEvent3_winterIsComing()
     {
         myPanel.SetActive(true);
-        Time.timeScale = 0;
 
         GameObject findTextMessage = GameObject.FindWithTag("TextMessage");
         if (findTextMessage != null)
         {
             Debug.Log("LOAD :: Zaladowane Text Message Object");
             eventMessageToDisplay = findTextMessage.GetComponent<Text>();
-            eventMessageToDisplay.text = "Winter is coming! Snow has just started to fall heavily. Because of the blizzard you're not able to leave the shop. +10 to frustration level.";
+            eventMessageToDisplay.text = "Winter is coming! Snow has just started to fall heavily. Because of the blizzard you're not able to leave the shop. +40 to frustration level.";
+            gameControl.levelFrustration += 40;
+
+            GameObject findIllustration = GameObject.FindWithTag("EventIllustration");
+            Debug.Log(findIllustration.name);
+            if (findIllustration != null)
+            {
+                findIllustration.GetComponent<Image>().sprite = event3_NedStark;
+            }
         }
+        Time.timeScale = 0;
     }
 
     //fourth
     void startEvent4_fourth()
     {
         myPanel.SetActive(true);
-        Time.timeScale = 0;
 
         GameObject findTextMessage = GameObject.FindWithTag("TextMessage");
         if (findTextMessage != null)
@@ -254,13 +288,13 @@ public class LovelyWife : MonoBehaviour
             eventMessageToDisplay = findTextMessage.GetComponent<Text>();
             eventMessageToDisplay.text = "fourth event";
         }
+        Time.timeScale = 0;
     }
 
     //fifth
     void startEvent5_fifth()
     {
         myPanel.SetActive(true);
-        Time.timeScale = 0;
 
         GameObject findTextMessage = GameObject.FindWithTag("TextMessage");
         if (findTextMessage != null)
@@ -269,5 +303,6 @@ public class LovelyWife : MonoBehaviour
             eventMessageToDisplay = findTextMessage.GetComponent<Text>();
             eventMessageToDisplay.text = "fifth event";
         }
+        Time.timeScale = 0;
     }
 }
