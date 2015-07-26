@@ -25,6 +25,8 @@ public class LovelyWife : MonoBehaviour
     public Sprite event4_pfudor;
     public Sprite event5_noLife;
 
+    public bool superGuy;
+
 	void Start () 
     {
         GameObject findController = GameObject.FindWithTag("GameController");
@@ -42,6 +44,8 @@ public class LovelyWife : MonoBehaviour
         StartCoroutine(ChooseBetweenShoeAndEvent());
         StartCoroutine(pressKey());
         anima = GetComponent<Animator>();
+
+        superGuy = true;
 	}
     //korutyna pilnujaca klawiatury w evencie podstawowym
     IEnumerator pressKey()
@@ -305,9 +309,10 @@ public class LovelyWife : MonoBehaviour
     //no life
     void startEvent5_noLife()
     {
-        if (gameControl.levelFrustration >= 700)
+        if (gameControl.levelFrustration >= 700 && superGuy)
         {
             myPanel.SetActive(true);
+            superGuy = false;
 
             GameObject findTextMessage = GameObject.FindWithTag("TextMessage");
             if (findTextMessage != null)
