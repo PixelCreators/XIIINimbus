@@ -205,7 +205,7 @@ public class LovelyWife : MonoBehaviour
     {
         myPanel.SetActive(true);
 
-        if(gameControl.levelDecision >= 300)
+        if(gameControl.levelDecision >= 400)
         {
             //myPanel.SetActive(true);
             Time.timeScale = 0;
@@ -249,8 +249,8 @@ public class LovelyWife : MonoBehaviour
             {
                 findIllustration.GetComponent<Image>().sprite = event2_grumpyCat;
             }
+            Time.timeScale = 0;
         }
-        Time.timeScale = 0;
     }
 
     //winter is coming
@@ -272,8 +272,8 @@ public class LovelyWife : MonoBehaviour
             {
                 findIllustration.GetComponent<Image>().sprite = event3_NedStark;
             }
+            Time.timeScale = 0;
         }
-        Time.timeScale = 0;
     }
 
     //pfudor
@@ -288,7 +288,7 @@ public class LovelyWife : MonoBehaviour
             {
                 Debug.Log("LOAD :: Zaladowane Text Message Object");
                 eventMessageToDisplay = findTextMessage.GetComponent<Text>();
-                eventMessageToDisplay.text = "How sweeet!!!\n Pink fluffy unicorn is dancing on rainbow! :3\n You become quite relaxed.\n -400 to frustration level";
+                eventMessageToDisplay.text = "How sweeet!!!\n Pink fluffy unicorn is dancing on a rainbow! :3\n You become quite relaxed.\n -400 to frustration level";
                 gameControl.levelFrustration -= 400;
 
                 GameObject findIllustration = GameObject.FindWithTag("EventIllustration");

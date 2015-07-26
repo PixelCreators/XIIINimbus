@@ -31,6 +31,11 @@ public class Controller : MonoBehaviour
 
     }
 
+    public void LoadLevel(string level)
+    {
+        Application.LoadLevel(level);
+    }
+
   /*  IEnumerator drawShoe()
     {
 
@@ -97,5 +102,20 @@ public class Controller : MonoBehaviour
             Debug.Log("LOAD :: Zaladowanie Decision Bar");
             decisionBar = findDecisionBar.GetComponent<Image>();
         }
+    }
+
+    public void Update()
+    {
+        if (levelFrustration == 1000)
+            LoadLevel("GameOver");
+        else if (levelDecision == 500)
+            LoadLevel("Congratulations");
+
+    }
+
+    public void pressButton(string buttonType)
+    {
+        if (buttonType.Equals("ExitButton"))
+            Application.Quit();
     }
 }

@@ -8,8 +8,14 @@ public class MovementBetweenScenes : MonoBehaviour
         Application.LoadLevel(level);
     }
 
+    public void Exit()
+    {
+        Application.Quit();
+    }
+
 	// Update is called once per frame
 	void Update () {
-	
+        //GameObject findExitButton = GameObject.FindWithTag("ExitButton");
+        //if()
 	}
 }
