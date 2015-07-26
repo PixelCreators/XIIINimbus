@@ -16,6 +16,8 @@ public class PatientHusband : MonoBehaviour
     public bool quoteUsed = false;
     public bool justDoItUsed = false;
     public GameObject butt1, butt2, butt3, butt4, butt5, butt6, butt7;
+    public Animator anima;
+    public int IDZdarzenia;
 
     void Start()
     {
@@ -32,6 +34,7 @@ public class PatientHusband : MonoBehaviour
         butt6 = GameObject.Find("Button_11_quoteYoda");
         butt7 = GameObject.Find("Button_13_justDoIt");
         StartCoroutine(pressKey());
+        anima = GetComponent<Animator>();
     }
 
     public int frToSubstr_smoking = 50;
@@ -71,6 +74,7 @@ public class PatientHusband : MonoBehaviour
     {
         if (smokingUsed == false)
         {
+            anima.SetInteger("IDHusbanda", 1);
             if (myController.levelFrustration > frToSubstr_smoking)
                 myController.levelFrustration = myController.levelFrustration - frToSubstr_smoking;
             else
@@ -86,6 +90,7 @@ public class PatientHusband : MonoBehaviour
     {
         if (drinkingUsed == false)
         {
+            anima.SetInteger("IDHusbanda", 2);
             if (myController.levelFrustration > frToSubstr_drinking)
                 myController.levelFrustration = myController.levelFrustration - frToSubstr_drinking;
             else
@@ -101,6 +106,7 @@ public class PatientHusband : MonoBehaviour
     {
         if (meditationUsed == false)
         {
+            anima.SetInteger("IDHusbanda", 3);
             if (myController.levelFrustration > frToSubstr_meditation)
                 myController.levelFrustration = myController.levelFrustration - frToSubstr_meditation;
             else
@@ -115,6 +121,7 @@ public class PatientHusband : MonoBehaviour
     {
         if (shoutingUsed == false)
         {
+            anima.SetInteger("IDHusbanda", 4);
             if (myController.levelFrustration > frToSubstr_shouting)
                 myController.levelFrustration = myController.levelFrustration - frToSubstr_shouting;
             else
@@ -163,6 +170,7 @@ public class PatientHusband : MonoBehaviour
     {
         if (justDoItUsed == false)
         {
+            anima.SetInteger("IDHusbanda", 7);
             if (myController.levelFrustration > frToSubstr_justDoIt)
                 myController.levelFrustration = myController.levelFrustration - frToSubstr_justDoIt;
             else
