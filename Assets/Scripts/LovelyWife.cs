@@ -22,8 +22,8 @@ public class LovelyWife : MonoBehaviour
     public Sprite event1_lackOfMoney;
     public Sprite event2_grumpyCat;
     public Sprite event3_NedStark;
-    public Sprite event4;
-    public Sprite event5;
+    public Sprite event4_pfudor;
+    public Sprite event5_noLife;
 
 	void Start () 
     {
@@ -175,14 +175,14 @@ public class LovelyWife : MonoBehaviour
             Debug.Log("Event number 3 was chosen");
             startEvent3_winterIsComing();
             break;
-        //case 4:
-        //    Debug.Log("Event number 4 was chosen");
-        //    startEvent4_fourth();
-        //    break;
-        //case 5:
-        //    Debug.Log("Event number 5 was chosen");
-        //    startEvent5_fifth();
-        //    break;
+        case 4:
+            Debug.Log("Event number 4 was chosen");
+            startEvent4_pfudor();
+            break;
+        case 5:
+            Debug.Log("Event number 5 was chosen");
+            startEvent5_noLife();
+            break;
         default:
             Debug.Log("No event was chosen");
             break;
@@ -205,9 +205,9 @@ public class LovelyWife : MonoBehaviour
     {
         myPanel.SetActive(true);
 
-        if(gameControl.levelDecision >= 200)
+        if(gameControl.levelDecision >= 300)
         {
-            myPanel.SetActive(true);
+            //myPanel.SetActive(true);
             Time.timeScale = 0;
 
             GameObject findTextMessage = GameObject.FindWithTag("TextMessage");
@@ -215,7 +215,7 @@ public class LovelyWife : MonoBehaviour
             {
                 Debug.Log("LOAD :: Zaladowane Text Message Object");
                 eventMessageToDisplay = findTextMessage.GetComponent<Text>();
-                eventMessageToDisplay.text = "Sorry! Suddenly it turned out that you have too little money! :( You can't afford these shoes. Choose an other pair. +50 to frustration level, decision = 200";
+                eventMessageToDisplay.text = "Sorry! Suddenly it turned out that you have too little money! :(\n You can't afford these shoes. Choose an other pair.\n +50 to frustration level,\n decision = 200";
                 gameControl.levelDecision = 200;
                 gameControl.levelFrustration += 50;
 
@@ -240,8 +240,8 @@ public class LovelyWife : MonoBehaviour
         {
             Debug.Log("LOAD :: Zaladowane Text Message Object");
             eventMessageToDisplay = findTextMessage.GetComponent<Text>();
-            eventMessageToDisplay.text = "Oh no! Grumpy Cat visited the shop and decided to freeze you with its eyesight. + 40 to frustration level";
-            gameControl.levelFrustration += 40;
+            eventMessageToDisplay.text = "Oh no!\n Grumpy Cat visited the shop and decided to freeze you with its eyesight.\n +20 to frustration level";
+            gameControl.levelFrustration += 20;
 
             GameObject findIllustration = GameObject.FindWithTag("EventIllustration");
             Debug.Log(findIllustration.name);
@@ -263,8 +263,8 @@ public class LovelyWife : MonoBehaviour
         {
             Debug.Log("LOAD :: Zaladowane Text Message Object");
             eventMessageToDisplay = findTextMessage.GetComponent<Text>();
-            eventMessageToDisplay.text = "Winter is coming! Snow has just started to fall heavily. Because of the blizzard you're not able to leave the shop. +40 to frustration level.";
-            gameControl.levelFrustration += 40;
+            eventMessageToDisplay.text = "Winter is coming!\n Snow has just started to fall heavily. Because of the blizzard you're not able to leave the shop.\n +20 to frustration level.";
+            gameControl.levelFrustration += 20;
 
             GameObject findIllustration = GameObject.FindWithTag("EventIllustration");
             Debug.Log(findIllustration.name);
@@ -276,33 +276,55 @@ public class LovelyWife : MonoBehaviour
         Time.timeScale = 0;
     }
 
-    //fourth
-    void startEvent4_fourth()
+    //pfudor
+    void startEvent4_pfudor()
     {
-        myPanel.SetActive(true);
-
-        GameObject findTextMessage = GameObject.FindWithTag("TextMessage");
-        if (findTextMessage != null)
+        if (gameControl.levelFrustration >= 800)
         {
-            Debug.Log("LOAD :: Zaladowane Text Message Object");
-            eventMessageToDisplay = findTextMessage.GetComponent<Text>();
-            eventMessageToDisplay.text = "fourth event";
+            myPanel.SetActive(true);
+
+            GameObject findTextMessage = GameObject.FindWithTag("TextMessage");
+            if (findTextMessage != null)
+            {
+                Debug.Log("LOAD :: Zaladowane Text Message Object");
+                eventMessageToDisplay = findTextMessage.GetComponent<Text>();
+                eventMessageToDisplay.text = "How sweeet!!!\n Pink fluffy unicorn is dancing on rainbow! :3\n You become quite relaxed.\n -400 to frustration level";
+                gameControl.levelFrustration -= 400;
+
+                GameObject findIllustration = GameObject.FindWithTag("EventIllustration");
+                Debug.Log(findIllustration.name);
+                if (findIllustration != null)
+                {
+                    findIllustration.GetComponent<Image>().sprite = event4_pfudor;
+                }
+            }
+            Time.timeScale = 0;
         }
-        Time.timeScale = 0;
     }
 
-    //fifth
-    void startEvent5_fifth()
+    //no life
+    void startEvent5_noLife()
     {
-        myPanel.SetActive(true);
-
-        GameObject findTextMessage = GameObject.FindWithTag("TextMessage");
-        if (findTextMessage != null)
+        if (gameControl.levelFrustration >= 700)
         {
-            Debug.Log("LOAD :: Zaladowane Text Message Object");
-            eventMessageToDisplay = findTextMessage.GetComponent<Text>();
-            eventMessageToDisplay.text = "fifth event";
+            myPanel.SetActive(true);
+
+            GameObject findTextMessage = GameObject.FindWithTag("TextMessage");
+            if (findTextMessage != null)
+            {
+                Debug.Log("LOAD :: Zaladowane Text Message Object");
+                eventMessageToDisplay = findTextMessage.GetComponent<Text>();
+                eventMessageToDisplay.text = "A specific guy entered to the shop and you realized\n that it is awful to live with a woman, but without her even worse.\n -200 to frustration level";
+                gameControl.levelFrustration -= 300;
+
+                GameObject findIllustration = GameObject.FindWithTag("EventIllustration");
+                Debug.Log(findIllustration.name);
+                if (findIllustration != null)
+                {
+                    findIllustration.GetComponent<Image>().sprite = event5_noLife;
+                }
+            }
+            Time.timeScale = 0;
         }
-        Time.timeScale = 0;
     }
 }
