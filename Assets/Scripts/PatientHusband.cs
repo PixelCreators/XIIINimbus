@@ -136,10 +136,12 @@ public class PatientHusband : MonoBehaviour
     {
         if (manipulationUsed == false)
         {
+            anima.SetInteger("IDHusbanda", 5);
             if (myController.levelFrustration > frToSubstr_manipulation)
                 myController.levelFrustration = myController.levelFrustration - frToSubstr_manipulation;
             else
                 myController.levelFrustration = 0;
+            myController.levelDecision = myController.levelDecision + 100;
             manipulationUsed = true;
         }
         else
@@ -150,6 +152,7 @@ public class PatientHusband : MonoBehaviour
     {
         if (quoteUsed == false)
         {
+            anima.SetInteger("IDHusbanda", 6);
             if (myController.levelFrustration > frToSubstr_quote)
                 myController.levelFrustration = myController.levelFrustration - frToSubstr_quote;
             else
