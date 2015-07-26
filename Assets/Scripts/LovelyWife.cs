@@ -17,6 +17,8 @@ public class LovelyWife : MonoBehaviour
     public Animator anima;                  //referencja do animacji
     public int IDZdarzenia;                 //numer ID animacji
 
+    GameObject myPanel;
+
 	void Start () 
     {
         GameObject findController = GameObject.FindWithTag("GameController");
@@ -26,6 +28,10 @@ public class LovelyWife : MonoBehaviour
         }
         XColor = true;
         XType = true;
+
+        myPanel = GameObject.FindWithTag("MessagePanel");
+        myPanel.SetActive(false);
+
         Debug.Log("WIFE :: Start korutyny");
         StartCoroutine(ChooseBetweenShoeAndEvent());
         StartCoroutine(pressKey());
@@ -117,7 +123,7 @@ public class LovelyWife : MonoBehaviour
             yield return new WaitForSeconds(startTimer);
             //Animator anim = new Animator();
             //if(anim.GetCurrentAnimatorStateInfo(0).IsName("WifeStanding"));
-            shoeOrEvent = Random.Range(1, 2);
+            shoeOrEvent = Random.Range(1, 3);
             switch (shoeOrEvent)
             {
             case 1:
@@ -161,12 +167,15 @@ public class LovelyWife : MonoBehaviour
             break;
         case 3:
             Debug.Log("Event number 3 was chosen");
+            startEvent3_winterIsComing();
             break;
         case 4:
             Debug.Log("Event number 4 was chosen");
+            startEvent4_fourth();
             break;
         case 5:
             Debug.Log("Event number 5 was chosen");
+            startEvent5_fifth();
             break;
         default:
             Debug.Log("No event was chosen");
@@ -177,35 +186,88 @@ public class LovelyWife : MonoBehaviour
     //==========================================
     //EVENTS:
 
+    //OK button
+
+    public void pressOKButton()
+    {
+        myPanel.SetActive(false);
+        Time.timeScale = 1;
+    }
+
     //too little money
     void startEvent1_tooLittleMoney()
     {
-        if(gameControl.levelDecision == 500)
+        myPanel.SetActive(true);
+        Time.timeScale = 0;
+        
+        GameObject findTextMessage = GameObject.FindWithTag("TextMessage");
+        if (findTextMessage != null)
         {
-            GameObject findTextMessage = GameObject.FindWithTag("TextMessage");
-            if (findTextMessage != null)
-            {
-                Debug.Log("LOAD :: Zaladowane Text Message Object");
-                eventMessageToDisplay = findTextMessage.GetComponent<Text>();
-                eventMessageToDisplay.text = "Sorry! Suddenly it tourned out that you have too little money! :( You can't afford these shoes. Choose an other pair.";
-                gameControl.levelDecision = 250;
-                gameControl.levelFrustration += 20;
-            }
+            Debug.Log("LOAD :: Zaladowane Text Message Object");
+            eventMessageToDisplay = findTextMessage.GetComponent<Text>();
+            eventMessageToDisplay.text = "Sorry! Suddenly it tourned out that you have too little money! :( You can't afford these shoes. Choose an other pair.";
+            gameControl.levelDecision = 250;
+            gameControl.levelFrustration += 20;
         }
     }
 
     //Grumpy Cat
     void startEvent2_GrumpyCat()
     {
-        if (gameControl.levelDecision > 150)
+        myPanel.SetActive(true);
+        Time.timeScale = 0;
+        
+        GameObject findTextMessage = GameObject.FindWithTag("TextMessage");
+        if (findTextMessage != null)
         {
-            GameObject findTextMessage = GameObject.FindWithTag("TextMessage");
-            if (findTextMessage != null)
-            {
-                Debug.Log("LOAD :: Zaladowane Text Message Object");
-                eventMessageToDisplay = findTextMessage.GetComponent<Text>();
-                eventMessageToDisplay.text = "Oh no! Grumpy Cat visited the shop and decided to freeze you with its daily eyesight. :( You can't use any action for 5 seconds.";
-            }
+            Debug.Log("LOAD :: Zaladowane Text Message Object");
+            eventMessageToDisplay = findTextMessage.GetComponent<Text>();
+            eventMessageToDisplay.text = "Oh no! Grumpy Cat visited the shop and decided to freeze you with its daily eyesight. :( You can't use any action for 5 seconds.";
+        }
+    }
+
+    //winter is coming
+    void startEvent3_winterIsComing()
+    {
+        myPanel.SetActive(true);
+        Time.timeScale = 0;
+
+        GameObject findTextMessage = GameObject.FindWithTag("TextMessage");
+        if (findTextMessage != null)
+        {
+            Debug.Log("LOAD :: Zaladowane Text Message Object");
+            eventMessageToDisplay = findTextMessage.GetComponent<Text>();
+            eventMessageToDisplay.text = "Winter is coming! Snow has just started to fall heavily. Because of the blizzard you're not able to leave the shop. +10 to frustration level.";
+        }
+    }
+
+    //fourth
+    void startEvent4_fourth()
+    {
+        myPanel.SetActive(true);
+        Time.timeScale = 0;
+
+        GameObject findTextMessage = GameObject.FindWithTag("TextMessage");
+        if (findTextMessage != null)
+        {
+            Debug.Log("LOAD :: Zaladowane Text Message Object");
+            eventMessageToDisplay = findTextMessage.GetComponent<Text>();
+            eventMessageToDisplay.text = "fourth event";
+        }
+    }
+
+    //fifth
+    void startEvent5_fifth()
+    {
+        myPanel.SetActive(true);
+        Time.timeScale = 0;
+
+        GameObject findTextMessage = GameObject.FindWithTag("TextMessage");
+        if (findTextMessage != null)
+        {
+            Debug.Log("LOAD :: Zaladowane Text Message Object");
+            eventMessageToDisplay = findTextMessage.GetComponent<Text>();
+            eventMessageToDisplay.text = "fifth event";
         }
     }
 }
