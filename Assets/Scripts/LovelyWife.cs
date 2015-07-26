@@ -117,7 +117,6 @@ public class LovelyWife : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(startTimer);
-            
             //Animator anim = new Animator();
             //if(anim.GetCurrentAnimatorStateInfo(0).IsName("WifeStanding"));
             shoeOrEvent = Random.Range(1, 2);
