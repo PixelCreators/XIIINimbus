@@ -3,20 +3,18 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class LovelyWife : MonoBehaviour
-{
-    public int shoeOrEvent;
-    
+{   
     public int chosenEvent;                 //numer wybranego eventu
-    public Text eventMessageToDisplay;           //komunikat jaki zachodzi event
-    Animator anima;                         //referencja do animacji
-    
+    public int shoeOrEvent;                 //but badz event
+    public Text eventMessageToDisplay;      //komunikat jaki 
     public int BColor;                      //kolor buta
     public int BType;                       //wzor buta
     public bool XColor;                     //czy nie wybrano
     public bool XType;                      //czy nie wybrano
     public int points;                      //zmienna do decyzyjnosci
-    public float startTimer;            //czas co jaki losuje sie event (podstawowy lub specjalny)
+    public float startTimer;                //czas co jaki losuje sie event (podstawowy lub specjalny)
     public Controller gameControl;          //obiekt kontrolera
+    public Animator anima;                  //referencja do animacji
     public int IDZdarzenia;                 //numer ID animacji
 
 	void Start () 
@@ -176,6 +174,7 @@ public class LovelyWife : MonoBehaviour
         }
     }
 
+    //==========================================
     //EVENTS:
 
     //too little money

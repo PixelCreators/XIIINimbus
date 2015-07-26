@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class PatientHusband : MonoBehaviour
@@ -14,6 +15,7 @@ public class PatientHusband : MonoBehaviour
     public bool manipulationUsed = false;
     public bool quoteUsed = false;
     public bool justDoItUsed = false;
+    public GameObject butt1, butt2, butt3, butt4, butt5, butt6, butt7;
 
     void Start()
     {
@@ -22,6 +24,14 @@ public class PatientHusband : MonoBehaviour
         {
             myController = findController.GetComponent<Controller>();
         }
+        butt1 = GameObject.Find("Button_7_smoke");
+        butt2 = GameObject.Find("Button_9_drinkVodka");
+        butt3 = GameObject.Find("Button_8_meditate");
+        butt4 = GameObject.Find("Button_10_shout");
+        butt5 = GameObject.Find("Button_12_manipulate");
+        butt6 = GameObject.Find("Button_11_quoteYoda");
+        butt7 = GameObject.Find("Button_13_justDoIt");
+        StartCoroutine(pressKey());
     }
 
     public int frToSubstr_smoking = 50;
@@ -31,6 +41,30 @@ public class PatientHusband : MonoBehaviour
     public int frToSubstr_manipulation = 200;
     public int frToSubstr_quote = 150;
     public int frToSubstr_justDoIt = 200;
+
+    //korutyna dla klawiatury
+    IEnumerator pressKey()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0.01f);
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+                Smoke();
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+                DrinkVodka();
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+                Meditate();
+            if (Input.GetKeyDown(KeyCode.Alpha4))
+                Shout();
+
+            if (Input.GetKeyDown(KeyCode.Alpha5))
+                Manipulate();
+            if (Input.GetKeyDown(KeyCode.Alpha6))
+                QuoteYoda();
+            if (Input.GetKeyDown(KeyCode.Alpha7))
+                JustDoIt();
+        }
+    }
 
     //ACTIONS:
     public void Smoke()
@@ -42,6 +76,7 @@ public class PatientHusband : MonoBehaviour
             else
                 myController.levelFrustration = 0;
             smokingUsed = true;
+            
         }
         else
             return;
@@ -56,6 +91,7 @@ public class PatientHusband : MonoBehaviour
             else
                 myController.levelFrustration = 0;
             drinkingUsed = true;
+
         }
         else
             return;
